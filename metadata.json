@@ -1,0 +1,13 @@
+{
+  "name": "Timepub",
+  "description": "Powerful unified dashboard for cross-posting content to TikTok, YouTube, and Facebook simultaneously.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ],
+  "majorCapabilities": [
+    "social_media_integration",
+    "unified_posting",
+    "oauth_management"
+  ]
+}

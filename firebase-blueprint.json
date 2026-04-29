@@ -1,0 +1,61 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "Application user profile",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string" },
+        "displayName": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email"]
+    },
+    "Connection": {
+      "title": "Connection",
+      "description": "OAuth connection tokens for a social platform",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "platform": { "type": "string", "enum": ["tiktok", "youtube", "facebook"] },
+        "accessToken": { "type": "string" },
+        "refreshToken": { "type": "string" },
+        "expiry": { "type": "string", "format": "date-time" },
+        "accountName": { "type": "string" },
+        "accountImage": { "type": "string" }
+      },
+      "required": ["userId", "platform", "accessToken"]
+    },
+    "SocialPost": {
+      "title": "SocialPost",
+      "description": "A post record broadcast to platforms",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "content": { "type": "string" },
+        "mediaUrls": { "type": "array", "items": { "type": "string" } },
+        "platforms": { "type": "array", "items": { "type": "string" } },
+        "status": { "type": "string", "enum": ["pending", "success", "failed"] },
+        "results": { "type": "object" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "content", "platforms", "status"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profiles"
+    },
+    "/users/{userId}/connections/{platform}": {
+      "schema": "Connection",
+      "description": "OAuth tokens for various platforms"
+    },
+    "/posts/{postId}": {
+      "schema": "SocialPost",
+      "description": "Global post history"
+    }
+  }
+}
